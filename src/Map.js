@@ -1,32 +1,33 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 import { Button, Icon } from 'antd'
-
-const AnyReactComponent = ({ text }) => <div><Icon type="pushpin" theme="filled" className="marker" /></div>;
+import MapMarker from './MapMarker';
 
 class Map extends Component {
-  static defaultProps = {
-    center: {
-      lat: 59.95,
-      lng: 30.33
-    },
-    zoom: 11
-  };
+  state = {
+    zoom: 13
+  }
 
   render() {
+    let markers = this.props.localSpots.map(s => (
+      <MapMarker
+        key={s.spot_id}
+        lat={s.cords.lat}
+        lng={s.cords.lng}
+        name={s.spot_name}
+        county={s.county}
+      />
+    ))
     return (
-      // Important! Always set the container height explicitly
-      <div style={{ height: '100vh', width: '100%' }}>
+      <div>
         <GoogleMapReact
+          style={{width: '100%', height: '100%'}}
           bootstrapURLKeys={{ key: 'AIzaSyDCbwt_f4xYHZsCC54Zjq_eb5b5nb4RrAU' }}
-          defaultCenter={this.props.center}
-          defaultZoom={this.props.zoom}
+          defaultCenter={this.props.currentSpot.cords}
+          defaultZoom={this.state.zoom}
+          hoverDistance={20}
         >
-          <AnyReactComponent
-            lat={59.955413}
-            lng={30.337844}
-            text={'Kreyser Avrora'}
-          />
+          {markers}
         </GoogleMapReact>
       </div>
     );

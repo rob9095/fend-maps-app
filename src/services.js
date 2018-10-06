@@ -4,11 +4,9 @@ export function apiCall(path) {
   return fetch(path)
     .then(parseJSON)
     .then(json => {
-      console.log(json)
       resolve(json)
     })
     .catch(err => {
-      console.log(err)
       reject(err)
     })
   })
