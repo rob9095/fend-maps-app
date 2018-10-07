@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import { Table, Divider, Tag, Spin, Alert } from 'antd';
 import ReactChartkick, { AreaChart } from 'react-chartkick'
 import Chart from 'chart.js'
-import { apiCall } from './services';
+import { apiCall } from '../services';
 
 ReactChartkick.addAdapter(Chart)
 

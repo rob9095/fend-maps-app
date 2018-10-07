@@ -4,8 +4,8 @@ import SpotMenu from './SpotMenu';
 import SpotModal from './SpotModal';
 import { Button, Icon, Input, Spin } from 'antd'
 import MenuIcon from './MenuIcon';
-import {apiCall} from './services';
-import {activeSpots} from './activeSpots'
+import {apiCall} from '../services';
+import {activeSpots} from '../activeSpots'
 
 const Search = Input.Search;
 
