@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Work+Sans:400,700');
+/* Global */
 body {
   margin: 0;
   padding: 0;
@@ -22,6 +23,12 @@ h1, h1, h3, h4, h5, p, a {
   font-family: 'Work Sans', sans-serif !important;
 }
 
+ul {
+  display: flex;
+  list-style: none;
+  flex-direction: column;
+}
+
 body div .App {
   height: 100%;
   overflow: hidden;
@@ -36,6 +43,31 @@ body div .App {
   flex-direction: column;
 }
 
+.bottom {
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.custom-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 28px;
+  width: 28px;
+}
+
+/* Loading Screen */
+.loader {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  flex-direction: column;
+  background: #001529;
+}
+
+/* Sidebar  */
+
 #left-sidebar {
   flex-shrink: 0;
   background: #001529;
@@ -46,29 +78,25 @@ body div .App {
   width: 0px;
 }
 
-.logo-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-shrink: 0;
-  height: 70px;
-}
-
 .sidebar-top h4 {
   color: #fff;
   text-transform: uppercase;
   margin: 0;
 }
 
-.content-top {
-  flex-shrink: 0;
-  display: flex;
-  background: #001529;
-  height: 70px;
-  justify-content: flex-start;
-  align-items: center;
-  padding: 0px 20px;
+.ant-menu-item {
+  padding-left: 30px !important;
 }
+
+.search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70px;
+  margin: 0px 20px;
+}
+
+/* Main Content */
 
 #main-content {
   width: 100%;
@@ -80,18 +108,11 @@ body div .App {
   width: 100%;
 }
 
-.bottom {
-  flex-grow: 1;
-  overflow-y: auto;
-}
+/* Main Content Navbar */
 
-.menu-trigger svg {
-  font-size: 2em;
-  color: #fff;
-}
-.menu-trigger {
-  margin-left: 10px;
-  cursor: pointer;
+.content-top {
+  background: #001529;
+  padding: 0px 20px;
 }
 
 .navbar {
@@ -103,34 +124,12 @@ body div .App {
   box-shadow: 0px 1px 15px 1px rgba(69,65,78,0.1);
 }
 
-.custom-icon {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 28px;
-    width: 28px;
-}
-
-.drop-menu {
-    position: absolute;
-    background: white;
-    width: 150px;
-    right: 10px;
-    top: 68px;
-    z-index: 1150;
-    border-radius: 3px;
-    min-height: 100px;
-}
-
-.drop-menu::after {
-    position: absolute;
-    content: '';
-    width: 0px;
-    height: 0px;
-    top: -30px;
-    right: 12px;
-    border: 12px solid transparent;
-    border-bottom: 20px solid #fff;
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  height: 70px;
 }
 
 h1.logo {
@@ -140,25 +139,42 @@ h1.logo {
   padding-left: 20px;
 }
 
-ul {
-  display: flex;
-  list-style: none;
-  flex-direction: column;
+.menu-trigger svg {
+  font-size: 2em;
+  color: #fff;
 }
 
-.ant-menu-item {
-  padding-left: 30px !important;
+.menu-trigger {
+  margin-left: 10px;
+  cursor: pointer;
 }
 
-.seach-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 50px;
-  margin: 0px 10px;
+/* Right Nav Drop Menu */
+
+.drop-menu {
+  position: absolute;
+  background: white;
+  width: 150px;
+  right: 10px;
+  top: 68px;
+  z-index: 1150;
+  border-radius: 3px;
+  min-height: 100px;
+}
+
+.drop-menu::after {
+  position: absolute;
+  content: '';
+  width: 0px;
+  height: 0px;
+  top: -30px;
+  right: 12px;
+  border: 12px solid transparent;
+  border-bottom: 20px solid #fff;
 }
 
 /* Map Marker */
+
 .marker {
   position: absolute;
   width: 40px;
@@ -194,20 +210,8 @@ ul {
   color: #fff;
 }
 
-.marker.open {
-
-}
-
-.loader {
-  display: flex !important;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  flex-direction: column;
-  background: #001529;
-}
-
 /* Forcast Table */
+
 ul.ant-pagination.ant-table-pagination {
   flex-direction: row;
 }

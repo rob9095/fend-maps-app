@@ -120,7 +120,7 @@ class App extends Component {
       <div className="App">
         <div id="left-sidebar" className={this.state.showSidebar ? "column open" : "column closed"}>
             <div className="bottom">
-              <div className="seach-container">
+              <div className="search-container">
                 <Search placeholder="Search" value={searchValue} name="searchValue" onChange={this.handleSearch} />
               </div>
               <SpotMenu
