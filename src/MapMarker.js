@@ -1,28 +1,42 @@
 import React, { Component } from 'react';
-import { Icon, Popover } from 'antd';
+import { Icon, Spin, Tooltip } from 'antd';
+import SpotModal from './SpotModal';
 
 export default class MapMarker extends Component {
   constructor(props) {
     super(props)
     this.state = {
-
+      showModal: false,
     }
   }
-  handleClick = () => {
-    console.log(this.props.name)
+
+  handleClick = (e) => {
+    this.setState({showModal: true})
+    this.props.onNewSpot(this.props.id)
   }
+
+  closeModal = () => {
+    this.setState({
+      showModal: false,
+    })
+  }
+
   render(){
-    const { name, county } = this.props
-    const popContent = (
-      <div>
-        <p>{name}</p>
-        <p>{county}</p>
-      </div>
-    );
+    const { name, county, id } = this.props
     return(
-      <Popover content={popContent} title={name}>
-        <div className="marker" onClick={this.handleClick}>{name.split('')[0]}</div>
-      </Popover>
+      <div>
+        <Tooltip placement="top" title={name}>
+          <div className={this.props.isCurrentSpot ? 'marker open' : 'marker'} onClick={this.handleClick}>{name.split('')[0]}</div>
+        </Tooltip>
+        {this.state.showModal && (
+          <SpotModal
+            id={id}
+            name={name}
+            county={county}
+            onClose={this.closeModal}
+          />
+        )}
+      </div>
     )
   }
 }

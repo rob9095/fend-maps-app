@@ -1,5 +1,5 @@
 import React from 'react';
-import { Menu, Icon, Switch } from 'antd';
+import { Menu } from 'antd';
 
 const SubMenu = Menu.SubMenu;
 
@@ -11,21 +11,9 @@ class SpotMenu extends React.Component {
     }
   }
 
-  componentDidMount() {
-    setTimeout(()=>{
-      this.scrollTo(this.props.currentSpot.spot_id)
-    }, 1000)
-  }
-
   scrollTo = (key) => {
     const node = document.getElementById(key)
     node.scrollIntoView({block: 'start', behavior: 'smooth'});
-  }
-
-  changeTheme = (value) => {
-    this.setState({
-      theme: value ? 'dark' : 'light',
-    });
   }
 
   handleClick = (e) => {
@@ -34,6 +22,7 @@ class SpotMenu extends React.Component {
     this.setState({
       current: e.key,
     });
+    this.props.onMenuClick(e.key,true)
   }
 
   render() {
@@ -57,14 +46,6 @@ class SpotMenu extends React.Component {
     })
     return (
       <div>
-        <Switch
-          checked={this.state.theme === 'dark'}
-          onChange={this.changeTheme}
-          checkedChildren="Dark"
-          unCheckedChildren="Light"
-        />
-        <br />
-        <br />
         <Menu
           theme={this.state.theme}
           onClick={this.handleClick}

@@ -11,6 +11,7 @@ body {
 html {
   font-family: 'Work Sans', sans-serif !important;
   height: 100%;
+  overflow: hidden;
 }
 
 #root {
@@ -41,7 +42,11 @@ body div .App {
   width: 220px;
 }
 
-.sidebar-top {
+#left-sidebar.closed {
+  width: 0px;
+}
+
+.logo-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -69,11 +74,6 @@ body div .App {
   width: 100%;
 }
 
-ul {
-  display: inline-flex;
-  list-style: none;
-}
-
 #main-content .bottom {
   overflow: hidden;
   position: sticky;
@@ -86,11 +86,12 @@ ul {
 }
 
 .menu-trigger svg {
-  font-size: 2.5em;
+  font-size: 2em;
   color: #fff;
 }
 .menu-trigger {
   margin-left: 10px;
+  cursor: pointer;
 }
 
 .navbar {
@@ -99,12 +100,44 @@ ul {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  box-shadow: 0px 1px 15px 1px rgba(69,65,78,0.1);
 }
 
-.logo h1 {
+.custom-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 28px;
+    width: 28px;
+}
+
+.drop-menu {
+    position: absolute;
+    background: white;
+    width: 150px;
+    right: 10px;
+    top: 68px;
+    z-index: 1150;
+    border-radius: 3px;
+    min-height: 100px;
+}
+
+.drop-menu::after {
+    position: absolute;
+    content: '';
+    width: 0px;
+    height: 0px;
+    top: -30px;
+    right: 12px;
+    border: 12px solid transparent;
+    border-bottom: 20px solid #fff;
+}
+
+h1.logo {
   color: #fff;
   text-transform: uppercase;
   margin: 0;
+  padding-left: 20px;
 }
 
 ul {
@@ -117,6 +150,14 @@ ul {
   padding-left: 30px !important;
 }
 
+.seach-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  margin: 0px 10px;
+}
+
 /* Map Marker */
 .marker {
   position: absolute;
@@ -124,11 +165,11 @@ ul {
   height: 40px;
   left: -20px;
   top: -20px;
-  border: 4px solid #0069cb;
+  border: 6px solid #1890ff;
   border-radius: 40px;
   background-color: #fff;
-  color: #fff;
-  font-size: 24px;
+  color: #1890ff;
+  font-size: 14px;
   padding: 5px;
   cursor: pointer;
   display: flex;
@@ -136,7 +177,50 @@ ul {
   align-items: center;
 }
 
-.marker:hover {
-  border-color: #0069cb;
-  background-color: #0069cb;
+.marker::after {
+  position: absolute;
+  content: '';
+  width: 0px;
+  height: 0px;
+  bottom: -31px;
+  left: 0px;
+  border: 14px solid transparent;
+  border-top: 17px solid #1890ff;
+}
+
+.marker.open, .marker:hover {
+  border-color: #1890ff;
+  background-color: #1890ff;
+  color: #fff;
+}
+
+.marker.open {
+
+}
+
+.loader {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  flex-direction: column;
+  background: #001529;
+}
+
+/* Forcast Table */
+ul.ant-pagination.ant-table-pagination {
+  flex-direction: row;
+}
+
+td, th div {
+  text-align: center;
+}
+
+.temp-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.temp-container h4 span {
+  font-weight: normal;
 }
