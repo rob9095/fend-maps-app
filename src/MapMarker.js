@@ -23,10 +23,14 @@ export default class MapMarker extends Component {
 
   render(){
     const { name, county, id } = this.props
+    let n = ''
+    for (let word of name.split(' ')){
+      n = n + word[0]
+    }
     return(
       <div>
         <Tooltip placement="top" title={name}>
-          <div className={this.props.isCurrentSpot ? 'marker open' : 'marker'} onClick={this.handleClick}>{name.split('')[0]}</div>
+          <div className={this.props.isCurrentSpot ? 'marker open' : 'marker'} onClick={this.handleClick}>{n}</div>
         </Tooltip>
         {this.state.showModal && (
           <SpotModal

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import MyFancyComponent from './Map2';
 import Map from './Map';
 import SpotMenu from './SpotMenu';
 import SpotModal from './SpotModal';
