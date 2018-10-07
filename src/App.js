@@ -80,9 +80,8 @@ class App extends Component {
       this.setState({
         loading: false,
         allSpots,
-        //Huntington Beach/orange county are defaults
+        //Huntington Beach Orange County is defaults
         currentSpot: allSpots.find(s => s.spot_id === 643),
-        localSpots: allSpots.filter(s => s.county_name === 'Orange County'),
         counties,
         showSidebar: document.documentElement.clientWidth > 500 ? true : false,
       })
@@ -106,13 +105,12 @@ class App extends Component {
     let currentSpot = this.state.allSpots.find(s=>s.spot_id === parseInt(id))
     this.setState({
       currentSpot,
-      localSpots: this.state.allSpots.filter(s => s.county_name === currentSpot.county_name),
       showModal,
     })
   }
 
   render() {
-    const {currentSpot, localSpots, counties, allSpots, searchValue} = this.state;
+    const {currentSpot, counties, allSpots, searchValue} = this.state;
     if (this.state.loading) {
       return (
         <Spin className="loader" spinning size="large"/>
@@ -156,7 +154,6 @@ class App extends Component {
             <div className="bottom">
               <Map
                 currentSpot={currentSpot}
-                localSpots={localSpots}
                 allSpots={allSpots}
                 searchValue={searchValue}
                 onNewSpot={this.handleNewSpot}

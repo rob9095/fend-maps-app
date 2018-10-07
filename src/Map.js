@@ -22,8 +22,8 @@ class Map extends Component {
   }
 
   render() {
-    const {searchValue, localSpots, currentSpot, clickedSpot} = this.props
-    let searchMarkers = localSpots.filter(s=>s.spot_name.toLowerCase().includes(searchValue)).map(s => (
+    const {searchValue, allSpots, currentSpot, clickedSpot} = this.props
+    let searchMarkers = allSpots.filter(s=>s.spot_name.toLowerCase().includes(searchValue)).map(s => (
       <MapMarker
         key={s.spot_id}
         lat={s.cords.lat}
@@ -35,7 +35,7 @@ class Map extends Component {
         isCurrentSpot={s.spot_id == currentSpot.spot_id}
       />
     ))
-    let markers = localSpots.map(s => (
+    let markers = allSpots.map(s => (
       <MapMarker
         key={s.spot_id}
         lat={s.cords.lat}
