@@ -46,8 +46,10 @@ class App extends Component {
     })
   }
 
+  //initalize view when componentMounts, gets all surf spot data
   init = () => {
     apiCall('http://api.spitcast.com/api/spot/all')
+    // map over the response, add cords object to use on map. filter out spots not in activeSpots array since they dont have forcast data
     .then(allSpots => {
       allSpots = allSpots.map(s=>({
         ...s,
@@ -56,6 +58,7 @@ class App extends Component {
           lng: s.longitude,
         }
       })).filter(s=>activeSpots.includes(s.spot_name))
+      // map spots to create array of county names, filter out duplicates
       let counties = allSpots.map(s=>s.county_name).filter((c,i,a)=> c !== a[i+1] ? c : null)
       this.setState({
         loading: false,
@@ -65,16 +68,6 @@ class App extends Component {
         counties,
         showSidebar: document.documentElement.clientWidth > 500 ? true : false,
       })
-    })
-    .catch(err => {
-      this.handleError({err,message:'Unable to get spot data'})
-    })
-  }
-
-  handleApiRequest = (url) => {
-    apiCall(url)
-    .then(res => {
-      console.log(res)
     })
     .catch(err => {
       this.handleError({err,message:'Unable to get spot data'})
