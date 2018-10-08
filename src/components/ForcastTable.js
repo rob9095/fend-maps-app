@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { Table, Divider, Tag, Spin, Alert } from 'antd';
+import { Table, Spin, Alert } from 'antd';
 import ReactChartkick, { AreaChart } from 'react-chartkick'
 import Chart from 'chart.js'
 import { apiCall } from '../services';
@@ -112,22 +112,8 @@ class ForcastTable extends Component {
         })
       }
     })
-    //filter out any hours that passed already from the same day
-    .filter(f=>{
-      //if the date from the api matches the curremt moment date
-      if (f.date.toLowerCase() === moment(new Date()).format('dddd MMM DD YYYY').toLowerCase()) {
-        //only return forcasts that are past the current hour
-        if (f.momentHr >= hour - 1) {
-          return {
-            ...f,
-          }
-        }
-      } else {
-        return {
-          ...f
-        }
-      }
-    })
+    // if the moment hour - 1 passed, filter out those results unless the date is not from today
+    .filter(f => ((f.momentHr >= hour - 1 || f.date.toLowerCase() !== moment(new Date()).format('dddd MMM DD YYYY').toLowerCase())))
     this.setState({
       forcast,
       tide,

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Icon, Tooltip } from 'antd';
 import SpotModal from './SpotModal';
 
 export default class MapMarker extends Component {

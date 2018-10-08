@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
-import { Button, Icon } from 'antd'
 import MapMarker from './MapMarker';
 
 class Map extends Component {
@@ -22,7 +21,7 @@ class Map extends Component {
   }
 
   render() {
-    const {searchValue, allSpots, currentSpot, clickedSpot} = this.props
+    const {searchValue, allSpots, currentSpot } = this.props
     let searchMarkers = allSpots.filter(s=>s.spot_name.toLowerCase().includes(searchValue)).map(s => (
       <MapMarker
         key={s.spot_id}
@@ -32,7 +31,7 @@ class Map extends Component {
         county={s.county_name}
         id={s.spot_id}
         onNewSpot={this.handleNewSpot}
-        isCurrentSpot={s.spot_id == currentSpot.spot_id}
+        isCurrentSpot={s.spot_id === currentSpot.spot_id}
       />
     ))
     let markers = allSpots.map(s => (
@@ -44,7 +43,7 @@ class Map extends Component {
         county={s.county_name}
         id={s.spot_id}
         onNewSpot={this.handleNewSpot}
-        isCurrentSpot={s.spot_id == currentSpot.spot_id}
+        isCurrentSpot={s.spot_id === currentSpot.spot_id}
       />
     ))
     return (

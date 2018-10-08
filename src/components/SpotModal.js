@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Icon, Modal } from 'antd';
+import { Modal } from 'antd';
 import ForcastTable from './ForcastTable';
 
 export default class SpotModal extends Component {
@@ -19,7 +19,6 @@ export default class SpotModal extends Component {
 
   render(){
     const { name, county, id } = this.props
-    const { forcast, loadingForcast, forcastError} = this.state;
     return(
         <Modal
           title={name + ' - ' + county}

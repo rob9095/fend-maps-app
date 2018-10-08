@@ -17,7 +17,6 @@ class SpotMenu extends React.Component {
   }
 
   handleClick = (e) => {
-    console.log('click ', e);
     this.scrollTo(e.key)
     this.setState({
       current: e.key,

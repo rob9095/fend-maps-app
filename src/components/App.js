@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Map from './Map';
 import SpotMenu from './SpotMenu';
 import SpotModal from './SpotModal';
-import { Button, Icon, Input, Spin } from 'antd'
+import { Icon, Input, Spin } from 'antd'
 import {apiCall} from '../services';
 import {activeSpots} from '../activeSpots'
 
