@@ -167,7 +167,7 @@ class App extends Component {
               <div className="drop-menu">
                   <div className="menu-container">
                       <p style={{margin: 0}}>
-                        Surfcast provides live surf forcasts, wind, and tide information for more than 100 surf spots in California.
+                        Surfcast provides live surf forecasts, wind, and tide information for more than 100 surf spots in California.
                       </p>
                       <div className="column" style={{paddingTop: 10}}>
                         <Button href="https://github.com/rob9095/fend-maps-app" type="primary" icon="github">
