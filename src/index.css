@@ -43,7 +43,7 @@ body div .App {
   flex-direction: column;
 }
 
-.bottom {
+.content {
   flex-grow: 1;
   overflow-y: auto;
 }
@@ -100,13 +100,13 @@ a.underline {
   margin: 0px 20px;
 }
 
-/* Main Content */
+/* App Container */
 
-#main-content {
+#app-container {
   width: 100%;
 }
 
-#main-content .bottom {
+#app-container .content {
   overflow: hidden;
   position: sticky;
   width: 100%;
@@ -115,7 +115,7 @@ a.underline {
 
 /* Main Content Navbar */
 
-.content-top {
+header {
   background: #001529;
   padding: 0px 20px;
 }
@@ -141,6 +141,7 @@ h1.logo {
   color: #fff;
   margin: 0;
   padding-left: 20px;
+  font-size: 31px;
 }
 
 .menu-trigger svg {
@@ -190,8 +191,10 @@ h1.logo {
   font-size: 12px;
 }
 
-.footer.sidebar-open {
-  width: calc(100% - 220px);
+@media screen and (min-width:499px){
+  .footer.sidebar-open {
+    width: calc(100% - 220px);
+  }
 }
 
 .footer a {

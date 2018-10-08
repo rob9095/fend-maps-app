@@ -103,8 +103,8 @@ class App extends Component {
     }
     return (
       <div className="App">
-        <div id="left-sidebar" className={this.state.showSidebar ? "column open" : "column closed"}>
-            <div className="bottom">
+        <aside id="left-sidebar" className={this.state.showSidebar ? "column open" : "column closed"}>
+            <div className="content">
               <div className="search-container">
                 <Input
                   id="search"
@@ -128,10 +128,10 @@ class App extends Component {
                 onMenuClick={this.handleNewSpot}
               />
             </div>
-        </div>
-        <div id="main-content" className="column">
-            <div className="content-top">
-              <div className="navbar">
+        </aside>
+        <div id="app-container" className="column">
+            <header>
+              <nav className="navbar">
                 <div className="logo-container">
                   <Icon
                     type={this.state.showSidebar ? "align-right" : "align-left"}
@@ -149,8 +149,8 @@ class App extends Component {
                     onClick={this.toggle('showMenu')}
                   />
                 </div>
-              </div>
-            </div>
+              </nav>
+            </header>
             {this.state.showMenu && (
               <div className="drop-menu">
                   <div className="menu-container">
@@ -158,7 +158,7 @@ class App extends Component {
                   </div>
               </div>
             )}
-            <div className="bottom">
+            <article className="content">
               <Map
                 currentSpot={currentSpot}
                 allSpots={allSpots}
@@ -173,15 +173,15 @@ class App extends Component {
                   onClose={this.toggle('showModal')}
                 />
               )}
-              <div className={this.state.showSidebar ? "footer sidebar-open" : "footer"}>
-                <div className="details">
-                  <a href="http://github.com/rob9095"><Icon type="github" theme="outlined" /> @rob9095</a>
-                </div>
-                <div className="credit">
-                  Data Provided by <a className="underline" href="http://www.spitcast.com/api/docs/">Spit Cast</a>
-                </div>
+            </article>
+            <footer className={this.state.showSidebar ? "footer sidebar-open" : "footer"}>
+              <div className="details">
+                <a href="http://github.com/rob9095"><Icon type="github" theme="outlined" /> @rob9095</a>
               </div>
-            </div>
+              <div className="credit">
+                Data Provided by <a className="underline" href="http://www.spitcast.com/api/docs/">Spit Cast</a>
+              </div>
+            </footer>
         </div>
       </div>
     );
