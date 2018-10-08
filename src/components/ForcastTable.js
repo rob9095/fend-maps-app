@@ -59,7 +59,7 @@ class ForcastTable extends Component {
   getForcast = (county,id) => {
     return new Promise( async (resolve,reject) => {
       let c = county.toLowerCase().replace(/ /g,'-')
-      let forcast = await apiCall(`http://api.spitcast.com/api/spot/forecast/${id}/`)
+      let forcast = await apiCall(`http://api.spitcast.com/api/spot/forecast/${id}/?dcat=week`)
       let wind = await apiCall(`http://api.spitcast.com/api/county/wind/${c}/`)
       let temp = await apiCall(`http://api.spitcast.com/api/county/water-temperature/${c}/`)
       let tide = await apiCall(`http://api.spitcast.com/api/county/tide/${c}/`)
@@ -95,18 +95,34 @@ class ForcastTable extends Component {
       })
     }).map(f=>{
       if(f.hour.includes('PM')){
+        let momentHr = parseInt(f.hour.split('PM')[0])
+        momentHr = momentHr === 12 ? 12 : momentHr + 12
         return({
           ...f,
-          momentHr: parseInt(f.hour.split('PM')[0])+12
+          momentHr,
         })
       } else {
+        let momentHr = parseInt(f.hour.split('AM')[0])
+        momentHr = momentHr === 12 ? 1 : momentHr
         return ({
           ...f,
-          momentHr: parseInt(f.hour.split('AM')[0])
+          momentHr,
         })
       }
-    }).filter(f=>f.momentHr >= hour - 1 && f.day.toLowerCase() === moment(new Date()).format('ddd').toLowerCase())
-    .sort((a,b)=>a.momentHr-b.momentHr)
+    }).filter(f=>{
+      if (f.day.toLowerCase() === moment(new Date()).format('ddd').toLowerCase()) {
+        if (f.momentHr >= hour - 1) {
+          return {
+            ...f,
+          }
+        }
+      } else {
+        return {
+          ...f
+        }
+      }
+    })
+    console.log(forcast)
     this.setState({
       forcast,
       loading: false,
