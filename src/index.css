@@ -260,3 +260,14 @@ td, th div {
 .temp-container h4 span {
   font-weight: normal;
 }
+
+/* Tidechart */
+.no-data {
+  width: 90%;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  font-weight: bold;
+}
