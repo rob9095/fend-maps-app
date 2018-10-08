@@ -20,7 +20,7 @@ const columns = [
     key: 'hour',
   },
   {
-    title: 'Forcast',
+    title: 'Forecast',
     dataIndex: 'shape_full',
     key: 'shape_full',
   },
@@ -36,12 +36,12 @@ const columns = [
   },
 ];
 
-class ForcastTable extends Component {
+class ForecastTable extends Component {
   constructor(props) {
     super(props)
     this.state = {
       loading: true,
-      forcast: [],
+      forecast: [],
       tide:[],
       temp: '',
       wetsuit: '',
@@ -53,19 +53,19 @@ class ForcastTable extends Component {
   }
 
   componentDidMount() {
-    this.getSpotForcast(this.props.id)
+    this.getSpotforecast(this.props.id)
   }
 
   handleDataFetch = (county,id) => {
     return new Promise( async (resolve,reject) => {
       let c = county.toLowerCase().replace(/ /g,'-')
-      let forcast = await apiCall(`http://api.spitcast.com/api/spot/forecast/${id}/?dcat=week`)
+      let forecast = await apiCall(`http://api.spitcast.com/api/spot/forecast/${id}/?dcat=week`)
       let wind = await apiCall(`http://api.spitcast.com/api/county/wind/${c}/`)
       let temp = await apiCall(`http://api.spitcast.com/api/county/water-temperature/${c}/`)
       let tide = await apiCall(`http://api.spitcast.com/api/county/tide/${c}/`)
       // if the response failed we set an empty array or 'n/a'
       resolve({
-        forcast: forcast || [],
+        forecast: forecast || [],
         wind: wind || [],
         temp: temp || {fahrenheit:'n/a',wetsuit:'n/a'},
         tide: tide || [],
@@ -73,23 +73,23 @@ class ForcastTable extends Component {
     })
   }
 
-  getSpotForcast = async (id) => {
-    let spotForcast = await this.handleDataFetch(this.props.county,id)
+  getSpotforecast = async (id) => {
+    let spotforecast = await this.handleDataFetch(this.props.county,id)
     let tide = {}
     let hour = moment(new Date()).hours()
     //loop tides array to create object of tides for tide chart
-    for (let t of spotForcast.tide) {
+    for (let t of spotforecast.tide) {
       tide = {
         ...tide,
         [t.hour]: t.tide.toFixed(1),
       }
     }
-    //map over the forcast to add wind data
-    let forcast = spotForcast.forcast.map(f=>{
+    //map over the forecast to add wind data
+    let forecast = spotforecast.forecast.map(f=>{
       return ({
         ...f,
-        wind: spotForcast.wind.find(h=>h.hour === f.hour).direction_text,
-        windSpeed: spotForcast.wind.find(h=>h.hour === f.hour).speed_kts,
+        wind: spotforecast.wind.find(h=>h.hour === f.hour).direction_text,
+        windSpeed: spotforecast.wind.find(h=>h.hour === f.hour).speed_kts,
       })
     })
     //remove hours that passed already in the current day. get current hour using momentjs above and convert 12 hr format in api response to 24 hour
@@ -115,17 +115,17 @@ class ForcastTable extends Component {
     // if the moment hour - 1 passed, filter out those results unless the date is not from today
     .filter(f => ((f.momentHr >= hour - 1 || f.date.toLowerCase() !== moment(new Date()).format('dddd MMM DD YYYY').toLowerCase())))
     this.setState({
-      forcast,
+      forecast,
       tide,
-      temp: spotForcast.temp.fahrenheit,
-      wetsuit: spotForcast.temp.wetsuit,
+      temp: spotforecast.temp.fahrenheit,
+      wetsuit: spotforecast.temp.wetsuit,
       loading: false,
     })
   }
 
 
   render(){
-    let data = this.state.forcast.map(f => ({
+    let data = this.state.forecast.map(f => ({
       key: f.spot_id + f.day + f.hour,
       date: moment(new Date(f.date)).format('M/D'),
       shape_full: (
@@ -154,7 +154,7 @@ class ForcastTable extends Component {
               colors={['#1890ff']}
             />
           </div>
-          <h3>Hourly Forcast</h3>
+          <h3>Hourly Forecast</h3>
           <div className="temp-container">
             <h5>Temperature: <span>{this.state.temp} °F</span></h5>
             <h5>Recommended: <span>{this.state.wetsuit}</span></h5>
@@ -165,10 +165,10 @@ class ForcastTable extends Component {
             columns={columns}
             dataSource={data}
             pagination={this.state.pagination}
-            total={this.state.forcast.length}
-            locale={{emptyText: 'Forcast Data Unavailable'}}
+            total={this.state.forecast.length}
+            locale={{emptyText: 'Forecast Data Unavailable'}}
             footer={() => (
-              <div className="forcast-credit">
+              <div className="forecast-credit">
                 <span>
                   Data Provided by <a href="http://www.spitcast.com/api/docs/">Spit Cast</a>
                 </span>
@@ -181,4 +181,4 @@ class ForcastTable extends Component {
   }
 }
 
-export default ForcastTable;
+export default ForecastTable;

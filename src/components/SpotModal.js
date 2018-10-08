@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Modal } from 'antd';
-import ForcastTable from './ForcastTable';
+import ForecastTable from './ForecastTable';
 
 export default class SpotModal extends Component {
   constructor(props) {
@@ -31,7 +31,7 @@ export default class SpotModal extends Component {
           okText={'Close'}
         >
           <div>
-            <ForcastTable
+            <ForecastTable
               id={id}
               county={county}
             />

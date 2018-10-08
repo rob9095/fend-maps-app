@@ -48,7 +48,7 @@ class App extends Component {
   //initalize view when componentMounts, gets all surf spot data
   init = () => {
     apiCall('http://api.spitcast.com/api/spot/all')
-    // map over the response, add cords object to use on map. filter out spots not in activeSpots array since they dont have forcast data
+    // map over the response, add cords object to use on map. filter out spots not in activeSpots array since they dont have forecast data
     .then(allSpots => {
       allSpots = allSpots.map(s=>({
         ...s,

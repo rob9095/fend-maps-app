@@ -290,7 +290,7 @@ h1.logo {
   left: 66px;
 }
 
-/* Forcast Table */
+/* Forecast Table */
 
 ul.ant-pagination.ant-table-pagination {
   flex-direction: row;
@@ -310,7 +310,7 @@ td, th div {
   font-weight: normal;
 }
 
-.forcast-credit {
+.forecast-credit {
   font-size: 11px;
   text-align: right;
   color: #60737c;
