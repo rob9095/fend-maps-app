@@ -164,7 +164,7 @@ class App extends Component {
               </nav>
             </header>
             {this.state.showMenu && (
-              <div className="drop-menu">
+              <div className="drop-menu" role="menu">
                   <div className="menu-container">
                       <p style={{margin: 0}}>
                         Surfcast provides live surf forecasts, wind, and tide information for more than 100 surf spots in California.

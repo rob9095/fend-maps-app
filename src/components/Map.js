@@ -50,7 +50,7 @@ class Map extends Component {
       <div>
         <GoogleMapReact
           style={{width: '100%', height: '95vh'}}
-          // bootstrapURLKeys={{ key: 'AIzaSyDCbwt_f4xYHZsCC54Zjq_eb5b5nb4RrAU' }}
+          bootstrapURLKeys={{ key: 'AIzaSyDCbwt_f4xYHZsCC54Zjq_eb5b5nb4RrAU' }}
           center={currentSpot.cords}
           defaultZoom={this.state.zoom}
           hoverDistance={20}
