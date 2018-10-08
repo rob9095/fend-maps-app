@@ -94,7 +94,6 @@ class ForcastTable extends Component {
         tide,
       })
       forcast = forcast.map(f=>{
-        let windDir = countyForcast.wind.find(h=>h.hour === f.hour)
         return ({
           ...f,
           wind: countyForcast.wind.find(h=>h.hour === f.hour).direction_text,
@@ -112,7 +111,8 @@ class ForcastTable extends Component {
             momentHr: parseInt(f.hour.split('AM')[0])
           })
         }
-      }).filter(f=>f.momentHr >= hour - 1).sort((a,b)=>a.momentHr-b.momentHr)
+      }).filter(f=>f.momentHr >= hour - 1 && f.day.toLowerCase() === moment(new Date()).format('ddd').toLowerCase())
+      .sort((a,b)=>a.momentHr-b.momentHr)
       this.setState({
         forcast,
         loading: false,
@@ -138,7 +138,7 @@ class ForcastTable extends Component {
     }))
     return(
       <div>
-        <h3>Tide Chart</h3>
+        <h3>Tide Chart (ft)</h3>
         <div className="tide-container">
           <AreaChart
             data={this.state.tide}

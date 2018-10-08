@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Icon, Spin, Tooltip } from 'antd';
+import { Icon, Tooltip } from 'antd';
 import SpotModal from './SpotModal';
 
 export default class MapMarker extends Component {
@@ -22,16 +22,26 @@ export default class MapMarker extends Component {
   }
 
   render(){
-    const { name, county, id } = this.props
+    const { name, county, id, isCurrentSpot } = this.props
     let n = ''
     for (let word of name.split(' ')){
       n = n + word[0]
     }
     return(
       <div>
-        <Tooltip placement="top" title={name}>
-          <div className={this.props.isCurrentSpot ? 'marker open' : 'marker'} onClick={this.handleClick}>{n}</div>
-        </Tooltip>
+        <div
+          onMouseOut={()=>this.setState({showPopover: false})}
+          onMouseOver={()=>this.setState({showPopover: true})}
+          className={isCurrentSpot ? 'marker open' : 'marker'}
+          onClick={this.handleClick}>{n}
+        </div>
+        {this.state.showPopover && (
+          <div className="info-popover">
+            <div>
+              <h3>{name}</h3>
+            </div>
+          </div>
+        )}
         {this.state.showModal && (
           <SpotModal
             id={id}

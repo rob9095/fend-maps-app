@@ -23,7 +23,7 @@ export default class SpotModal extends Component {
     return(
         <Modal
           title={name + ' - ' + county}
-          centered
+          style={{ top: document.documentElement.clientWidth >= 740 ? 0 : '10%' }}
           visible={this.state.showModal}
           afterClose={this.closeModal}
           cancelButtonProps={{style:{display: 'none'}}}

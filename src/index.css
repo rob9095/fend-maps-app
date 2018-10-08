@@ -209,6 +209,39 @@ h1.logo {
   color: #fff;
 }
 
+/* Marker Info Popover */
+
+.info-popover {
+  position: absolute;
+  background: white;
+  min-width: 150px;
+  min-height: 50px;
+  left: -73px;
+  top: -90px;
+  z-index: 1150;
+  border-radius: 3px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.info-popover h3 {
+  margin: 0;
+}
+
+.info-popover::after {
+  position: absolute;
+  content: '';
+  width: 0px;
+  height: 0px;
+  bottom: -18px;
+  border: 8px solid transparent;
+  border-top: 12px solid #fff;
+  left: 66px;
+}
+
 /* Forcast Table */
 
 ul.ant-pagination.ant-table-pagination {
