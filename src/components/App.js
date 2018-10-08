@@ -110,6 +110,7 @@ class App extends Component {
             <div className="content">
               <div className="search-container">
                 <Input
+                  autoFocus
                   id="search"
                   placeholder="Search"
                   value={searchValue}

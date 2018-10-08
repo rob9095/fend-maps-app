@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { Table, Spin, Tag, Alert } from 'antd';
+import { Table, Spin, Alert } from 'antd';
 import ReactChartkick, { AreaChart } from 'react-chartkick'
 import Chart from 'chart.js'
 import { apiCall } from '../services';

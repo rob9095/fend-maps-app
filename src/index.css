@@ -100,6 +100,11 @@ a.underline {
   margin: 0px 20px;
 }
 
+.menu-item:focus {
+  outline: none;
+  color: #fff !important;
+}
+
 /* App Container */
 
 #app-container {
@@ -118,6 +123,7 @@ a.underline {
 header {
   background: #001529;
   padding: 0px 20px;
+  box-shadow: 0px 1px 15px 1px rgba(69,65,78,0.1);
 }
 
 .navbar {
@@ -126,7 +132,6 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 0px 1px 15px 1px rgba(69,65,78,0.1);
 }
 
 h1.logo {
