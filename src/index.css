@@ -19,7 +19,7 @@ html {
   height: 100%;
 }
 
-h1, h1, h3, h4, h5, p, a {
+h1, h1, h3, h4, h5, p, a, td, th {
   font-family: 'Work Sans', sans-serif !important;
 }
 
@@ -113,7 +113,7 @@ a.underline {
   margin-bottom: 38px;
 }
 
-/* Main Content Navbar */
+/* Navbar */
 
 header {
   background: #001529;
@@ -133,6 +133,7 @@ h1.logo {
   color: #fff;
   margin: 0;
   font-size: 31px;
+  padding: 0px 20px;
 }
 
 .menu-trigger svg {
@@ -141,7 +142,6 @@ h1.logo {
 }
 
 .menu-trigger {
-  margin-left: 10px;
   cursor: pointer;
 }
 

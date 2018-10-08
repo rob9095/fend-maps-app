@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { Table, Spin, Alert } from 'antd';
+import { Table, Spin, Tag, Alert } from 'antd';
 import ReactChartkick, { AreaChart } from 'react-chartkick'
 import Chart from 'chart.js'
 import { apiCall } from '../services';
@@ -128,7 +128,14 @@ class ForcastTable extends Component {
     let data = this.state.forcast.map(f => ({
       key: f.spot_id + f.day + f.hour,
       date: moment(new Date(f.date)).format('M/D'),
-      shape_full: <Alert style={{padding: 0}} message={f.shape_full} type={f.shape.includes('p') ? 'info' : f.shape.includes('g') ? 'warning' : 'success'} />,
+      shape_full: (
+          <Alert
+            style={{padding: 0}}
+            message={f.shape_full}
+            //p is poor(show blue/info), g is good(show yellow/warning), last condition is f for fair(show success/green)
+            type={f.shape.includes('p') ? 'info' : f.shape.includes('g') ? 'warning' : 'success'}
+          />
+      ),
       size: f.size + " ft",
       hour: f.hour,
       wind: f.wind + " " + f.windSpeed + " kts",
