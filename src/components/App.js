@@ -86,6 +86,11 @@ class App extends Component {
     })
   }
 
+  handleSearchClear = () => {
+    this.setState({searchValue: ''})
+    document.getElementById('search').focus()
+  }
+
   render() {
     const {currentSpot, counties, allSpots, searchValue} = this.state;
     window.onresize = (e) => {
@@ -102,15 +107,16 @@ class App extends Component {
             <div className="bottom">
               <div className="search-container">
                 <Input
+                  id="search"
                   placeholder="Search"
                   value={searchValue}
                   name="searchValue"
                   onChange={this.handleSearch}
                   suffix={
                     searchValue ?
-                    <Icon type="close" onClick={()=>this.setState({searchValue: ''})} style={{cursor: 'pointer'}} />
+                    <Icon type="close" onClick={this.handleSearchClear} style={{cursor: 'pointer'}} />
                     :
-                    <Icon type="search" style={{cursor: 'pointer'}} />
+                    <Icon type="search" style={{cursor: 'pointer'}} onClick={()=>document.getElementById('search').focus()} />
                   }
                 />
               </div>
