@@ -34,13 +34,13 @@ export default class MapMarker extends Component {
           className={isCurrentSpot ? 'marker open' : 'marker'}
           onClick={this.handleClick}>{n}
         </div>
-        {this.state.showPopover && (
+        {this.state.showPopover || isCurrentSpot ? (
           <div className="info-popover">
             <div>
               <h3>{name}</h3>
             </div>
           </div>
-        )}
+        ) : null}
         {this.state.showModal && (
           <SpotModal
             id={id}

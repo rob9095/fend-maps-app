@@ -14,6 +14,9 @@ class SpotMenu extends React.Component {
 
   componentDidMount() {
     this.setState({openKeys: [this.props.currentSpot.county_name]})
+    setTimeout(()=>{
+      this.scrollTo(this.props.currentSpot.spot_id)
+    },1000)
   }
 
   scrollTo = (key) => {
@@ -22,7 +25,6 @@ class SpotMenu extends React.Component {
   }
 
   handleSpotClick = (e) => {
-    this.scrollTo(e.key)
     this.setState({
       current: e.key,
     });

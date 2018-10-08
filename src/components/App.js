@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Map from './Map';
 import SpotMenu from './SpotMenu';
 import SpotModal from './SpotModal';
-import { Icon, Input, Spin } from 'antd'
+import { Icon, Input, Spin, Button } from 'antd'
 import {apiCall} from '../services';
 import {activeSpots} from '../activeSpots'
 
@@ -166,7 +166,17 @@ class App extends Component {
             {this.state.showMenu && (
               <div className="drop-menu">
                   <div className="menu-container">
-                      <h1>hi</h1>
+                      <p style={{margin: 0}}>
+                        Surfcast provides live surf forcasts, wind, and tide information for more than 100 surf spots in California.
+                      </p>
+                      <div className="column" style={{paddingTop: 10}}>
+                        <Button href="https://github.com/rob9095/fend-maps-app" type="primary" icon="github">
+                          Github
+                        </Button>
+                      </div>
+                  </div>
+                  <div className="menu-footer">
+                    Data provided by <a href="http://www.spitcast.com/api/docs/">Spit Cast</a>
                   </div>
               </div>
             )}

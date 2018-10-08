@@ -152,6 +152,7 @@ h1.logo {
 .menu-button:hover {
   background: #001f3d;
 }
+
 .menu-button:focus {
   outline: none;
 }
@@ -166,7 +167,7 @@ h1.logo {
 .drop-menu {
   position: absolute;
   background: #fff;
-  width: 150px;
+  width: 250px;
   right: 22px;
   top: 68px;
   z-index: 1150;
@@ -183,6 +184,18 @@ h1.logo {
   right: 12px;
   border: 12px solid transparent;
   border-bottom: 20px solid #fff;
+}
+
+.drop-menu .menu-container {
+  padding: 20px;
+}
+
+.drop-menu .menu-footer {
+  font-size: 11px;
+  text-align: center;
+  color: #60737c;
+  margin-bottom: 10px;
+  margin-top: -10px;
 }
 
 /* Footer */
