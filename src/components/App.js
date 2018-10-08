@@ -59,17 +59,25 @@ class App extends Component {
       })).filter(s=>activeSpots.includes(s.spot_name))
       // map spots to create array of county names, filter out duplicates
       let counties = allSpots.map(s=>s.county_name).filter((c,i,a)=> c !== a[i+1] ? c : null)
+      const clientWidth = document.documentElement.clientWidth
       this.setState({
         loading: false,
         allSpots,
         //Huntington Beach Orange County is defaults
         currentSpot: allSpots.find(s => s.spot_id === 643),
         counties,
-        showSidebar: document.documentElement.clientWidth > 500 ? true : false,
+        showSidebar: clientWidth > 600 ? true : false,
       })
     })
     .catch(err => {
       this.handleError({err,message:'Unable to get spot data'})
+    })
+  }
+
+  handleWindowResize = () => {
+    const clientWidth = document.documentElement.clientWidth;
+    this.setState({
+      showSidebar: clientWidth <= 600 ? false : this.state.showSidebar,
     })
   }
 
@@ -83,6 +91,9 @@ class App extends Component {
 
   render() {
     const {currentSpot, counties, allSpots, searchValue} = this.state;
+    window.onresize = (e) => {
+      this.handleWindowResize();
+    }
     if (this.state.loading) {
       return (
         <Spin className="loader" spinning size="large"/>
@@ -138,6 +149,14 @@ class App extends Component {
                   onClose={this.toggle('showModal')}
                 />
               )}
+              <div className={this.state.showSidebar ? "footer sidebar-open" : "footer"}>
+                <div className="details">
+                  <a href="http://github.com/rob9095"><Icon type="github" theme="outlined" /> @rob9095</a>
+                </div>
+                <div className="credit">
+                  Data Provided by <a className="underline" href="http://www.spitcast.com/api/docs/">Spit Cast</a>
+                </div>
+              </div>
             </div>
         </div>
       </div>

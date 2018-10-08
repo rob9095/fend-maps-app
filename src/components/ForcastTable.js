@@ -138,8 +138,8 @@ class ForcastTable extends Component {
           </div>
           <h3>Hourly Forcast</h3>
           <div className="temp-container">
-            <h4>Temperature: <span>{this.state.temp} °F</span></h4>
-            <h4>Recommended: <span>{this.state.wetsuit}</span></h4>
+            <h5>Temperature: <span>{this.state.temp} °F</span></h5>
+            <h5>Recommended: <span>{this.state.wetsuit}</span></h5>
           </div>
           <Table
             loading={this.state.loading}
@@ -149,6 +149,13 @@ class ForcastTable extends Component {
             pagination={this.state.pagination}
             total={this.state.forcast.length}
             locale={{emptyText: 'Forcast Data Unavailable'}}
+            footer={() => (
+              <div className="forcast-credit">
+                <span>
+                  Data Provided by <a href="http://www.spitcast.com/api/docs/">Spit Cast</a>
+                </span>
+              </div>
+            )}
           />
         </div>
       </Spin>

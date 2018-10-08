@@ -56,6 +56,10 @@ body div .App {
   width: 28px;
 }
 
+a.underline {
+  border-bottom: 1px solid;
+}
+
 /* Loading Screen */
 .loader {
   display: flex !important;
@@ -106,6 +110,7 @@ body div .App {
   overflow: hidden;
   position: sticky;
   width: 100%;
+  margin-bottom: 38px;
 }
 
 /* Main Content Navbar */
@@ -134,7 +139,6 @@ body div .App {
 
 h1.logo {
   color: #fff;
-  text-transform: uppercase;
   margin: 0;
   padding-left: 20px;
 }
@@ -171,6 +175,28 @@ h1.logo {
   right: 12px;
   border: 12px solid transparent;
   border-bottom: 20px solid #fff;
+}
+
+/* Footer */
+.footer {
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background: #001529;
+  color: #fff;
+  font-size: 12px;
+  transition: width .3s;
+}
+
+.footer.sidebar-open {
+  width: calc(100% - 220px);
+}
+
+.footer a {
+  color: #fff;
 }
 
 /* Map Marker */
@@ -257,8 +283,14 @@ td, th div {
   justify-content: space-between;
 }
 
-.temp-container h4 span {
+.temp-container h5 span {
   font-weight: normal;
+}
+
+.forcast-credit {
+  font-size: 11px;
+  text-align: right;
+  color: #60737c;
 }
 
 /* Tidechart */
