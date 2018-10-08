@@ -275,6 +275,7 @@ ul.ant-pagination.ant-table-pagination {
 
 td, th div {
   text-align: center;
+  white-space: nowrap;
 }
 
 .temp-container {
@@ -290,6 +291,19 @@ td, th div {
   font-size: 11px;
   text-align: right;
   color: #60737c;
+}
+
+@media screen and (max-width: 400px) {
+  td, th {
+    padding: 3px 3px !important;
+    font-size: 12px;
+  }
+  td div span {
+    font-size: 12px;
+  }
+  .temp-container {
+    flex-direction: column;
+  }
 }
 
 /* Tidechart */
