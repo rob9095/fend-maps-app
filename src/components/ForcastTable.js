@@ -56,13 +56,14 @@ class ForcastTable extends Component {
     this.getSpotForcast(this.props.id)
   }
 
-  getForcast = (county,id) => {
+  handleDataFetch = (county,id) => {
     return new Promise( async (resolve,reject) => {
       let c = county.toLowerCase().replace(/ /g,'-')
       let forcast = await apiCall(`http://api.spitcast.com/api/spot/forecast/${id}/?dcat=week`)
       let wind = await apiCall(`http://api.spitcast.com/api/county/wind/${c}/`)
       let temp = await apiCall(`http://api.spitcast.com/api/county/water-temperature/${c}/`)
       let tide = await apiCall(`http://api.spitcast.com/api/county/tide/${c}/`)
+      // if the response failed we set an empty array or 'n/a'
       resolve({
         forcast: forcast || [],
         wind: wind || [],
@@ -73,29 +74,29 @@ class ForcastTable extends Component {
   }
 
   getSpotForcast = async (id) => {
-    let spotForcast = await this.getForcast(this.props.county,id)
+    let spotForcast = await this.handleDataFetch(this.props.county,id)
     let tide = {}
     let hour = moment(new Date()).hours()
+    //loop tides array to create object of tides for tide chart
     for (let t of spotForcast.tide) {
       tide = {
         ...tide,
         [t.hour]: t.tide.toFixed(1),
       }
     }
-    this.setState({
-      temp: spotForcast.temp.fahrenheit,
-      wetsuit: spotForcast.temp.wetsuit,
-      tide,
-    })
+    //map over the forcast to add wind data
     let forcast = spotForcast.forcast.map(f=>{
       return ({
         ...f,
         wind: spotForcast.wind.find(h=>h.hour === f.hour).direction_text,
         windSpeed: spotForcast.wind.find(h=>h.hour === f.hour).speed_kts,
       })
-    }).map(f=>{
+    })
+    //remove hours that passed already in the current day. get current hour using momentjs above and convert 12 hr format in api response to 24 hour
+    .map(f=>{
       if(f.hour.includes('PM')){
         let momentHr = parseInt(f.hour.split('PM')[0])
+        //add 12 to the hour if its a PM hour, unless its 12PM then set it 12
         momentHr = momentHr === 12 ? 12 : momentHr + 12
         return({
           ...f,
@@ -103,14 +104,19 @@ class ForcastTable extends Component {
         })
       } else {
         let momentHr = parseInt(f.hour.split('AM')[0])
+        // if the hour is 12AM set it to 1
         momentHr = momentHr === 12 ? 1 : momentHr
         return ({
           ...f,
           momentHr,
         })
       }
-    }).filter(f=>{
-      if (f.day.toLowerCase() === moment(new Date()).format('ddd').toLowerCase()) {
+    })
+    //filter out any hours that passed already from the same day
+    .filter(f=>{
+      //if the date from the api matches the curremt moment date
+      if (f.date.toLowerCase() === moment(new Date()).format('dddd MMM DD YYYY').toLowerCase()) {
+        //only return forcasts that are past the current hour
         if (f.momentHr >= hour - 1) {
           return {
             ...f,
@@ -122,12 +128,15 @@ class ForcastTable extends Component {
         }
       }
     })
-    console.log(forcast)
     this.setState({
       forcast,
+      tide,
+      temp: spotForcast.temp.fahrenheit,
+      wetsuit: spotForcast.temp.wetsuit,
       loading: false,
     })
   }
+
 
   render(){
     let data = this.state.forcast.map(f => ({
@@ -143,7 +152,7 @@ class ForcastTable extends Component {
         <div>
           <h3>Tide Chart (ft)</h3>
           <div className="tide-container">
-            {Object.values(this.state.tide).length === 0 && (<span className="no-data">Tide Data Unavailable</span>)}
+            {Object.values(this.state.tide).length === 0 && !this.state.loading && (<span className="no-data">Tide Data Unavailable</span>)}
             <AreaChart
               data={this.state.tide}
               height={"150px"}
@@ -158,6 +167,7 @@ class ForcastTable extends Component {
             <h5>Recommended: <span>{this.state.wetsuit}</span></h5>
           </div>
           <Table
+            loading={this.state.loading}
             size="small"
             columns={columns}
             dataSource={data}
