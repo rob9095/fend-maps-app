@@ -136,22 +136,32 @@ h1.logo {
   padding: 0px 20px;
 }
 
+.menu-button {
+  background: transparent;
+  border: 0px solid;
+  padding: 12px;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+.menu-button:hover,
+.menu-button:focus {
+  background: #001f3d;
+  outline: none;
+}
+
 .menu-trigger svg {
   font-size: 2em;
   color: #fff;
-}
-
-.menu-trigger {
-  cursor: pointer;
 }
 
 /* Right Nav Drop Menu */
 
 .drop-menu {
   position: absolute;
-  background: white;
+  background: #fff;
   width: 150px;
-  right: 10px;
+  right: 22px;
   top: 68px;
   z-index: 1150;
   border-radius: 3px;

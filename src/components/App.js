@@ -135,22 +135,30 @@ class App extends Component {
         <div id="app-container" className="column">
             <header>
               <nav className="navbar">
-                <Icon
-                  type={this.state.showSidebar ? "align-right" : "align-left"}
-                  theme="outlined"
-                  className="menu-trigger"
+                <button
+                  className="menu-button"
                   onClick={this.toggle('showSidebar')}
-                />
+                  >
+                    <Icon
+                      type={this.state.showSidebar ? "align-right" : "align-left"}
+                      theme="outlined"
+                      className="menu-trigger"
+                    />
+                </button>
                 <div>
                   <h1 className="logo">Surfcast</h1>
                 </div>
                 <div className="actions">
-                  <Icon
-                    type="ellipsis"
-                    theme="outlined"
-                    className="menu-trigger"
+                  <button
+                    className="menu-button"
                     onClick={this.toggle('showMenu')}
-                  />
+                    >
+                    <Icon
+                      type="ellipsis"
+                      theme="outlined"
+                      className="menu-trigger"
+                    />
+                  </button>
                 </div>
               </nav>
             </header>
