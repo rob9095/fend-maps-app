@@ -12,6 +12,9 @@ class App extends Component {
     showSidebar: true,
     showModal: false,
     showMenu: false,
+    allSpots: [],
+    counties: [],
+    currentSpot: {},
   }
 
   toggle = (prop) => {
@@ -132,13 +135,13 @@ class App extends Component {
         <div id="app-container" className="column">
             <header>
               <nav className="navbar">
-                <div className="logo-container">
-                  <Icon
-                    type={this.state.showSidebar ? "align-right" : "align-left"}
-                    theme="outlined"
-                    className="menu-trigger"
-                    onClick={this.toggle('showSidebar')}
-                  />
+                <Icon
+                  type={this.state.showSidebar ? "align-right" : "align-left"}
+                  theme="outlined"
+                  className="menu-trigger"
+                  onClick={this.toggle('showSidebar')}
+                />
+                <div>
                   <h1 className="logo">Surfcast</h1>
                 </div>
                 <div className="actions">
