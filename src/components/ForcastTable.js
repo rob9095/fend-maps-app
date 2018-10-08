@@ -142,7 +142,6 @@ class ForcastTable extends Component {
             <h5>Recommended: <span>{this.state.wetsuit}</span></h5>
           </div>
           <Table
-            loading={this.state.loading}
             size="small"
             columns={columns}
             dataSource={data}

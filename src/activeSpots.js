@@ -1,4 +1,5 @@
 export const activeSpots = [
+'Steamer Lane',
 'Oceanside Harbor',
 'Oceanside Pier',
 'Tamarack',

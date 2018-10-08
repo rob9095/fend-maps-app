@@ -188,7 +188,6 @@ h1.logo {
   background: #001529;
   color: #fff;
   font-size: 12px;
-  transition: width .3s;
 }
 
 .footer.sidebar-open {

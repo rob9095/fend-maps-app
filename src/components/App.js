@@ -7,8 +7,6 @@ import MenuIcon from './MenuIcon';
 import {apiCall} from '../services';
 import {activeSpots} from '../activeSpots'
 
-const Search = Input.Search;
-
 class App extends Component {
   state = {
     loading: true,
@@ -104,7 +102,18 @@ class App extends Component {
         <div id="left-sidebar" className={this.state.showSidebar ? "column open" : "column closed"}>
             <div className="bottom">
               <div className="search-container">
-                <Search placeholder="Search" value={searchValue} name="searchValue" onChange={this.handleSearch} />
+                <Input
+                  placeholder="Search"
+                  value={searchValue}
+                  name="searchValue"
+                  onChange={this.handleSearch}
+                  suffix={
+                    searchValue ?
+                    <Icon type="close" onClick={()=>this.setState({searchValue: ''})} style={{cursor: 'pointer'}} />
+                    :
+                    <Icon type="search" style={{cursor: 'pointer'}} />
+                  }
+                />
               </div>
               <SpotMenu
                 allSpots={allSpots}
@@ -119,11 +128,21 @@ class App extends Component {
             <div className="content-top">
               <div className="navbar">
                 <div className="logo-container">
-                  <MenuIcon className="menu-trigger" onClick={this.toggle('showSidebar')} />
+                  <Icon
+                    type={this.state.showSidebar ? "align-right" : "align-left"}
+                    theme="outlined"
+                    className="menu-trigger"
+                    onClick={this.toggle('showSidebar')}
+                  />
                   <h1 className="logo">Surfcast</h1>
                 </div>
                 <div className="actions">
-                  <Icon type="ellipsis" theme="outlined" className="menu-trigger" onClick={this.toggle('showMenu')} />
+                  <Icon
+                    type="ellipsis"
+                    theme="outlined"
+                    className="menu-trigger"
+                    onClick={this.toggle('showMenu')}
+                  />
                 </div>
               </div>
             </div>
