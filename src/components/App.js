@@ -41,7 +41,7 @@ class App extends Component {
 
   handleSearch = (e) => {
     this.setState({
-      [e.target.name]: e.target.value ? e.target.value.toLowerCase() : '',
+      [e.target.name]: e.target.value ? e.target.value : '',
     })
   }
 

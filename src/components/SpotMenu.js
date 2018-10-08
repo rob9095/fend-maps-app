@@ -52,7 +52,8 @@ class SpotMenu extends React.Component {
 
   render() {
     const {allSpots,counties,currentSpot,searchValue} = this.props
-    const searchMenu = allSpots.filter(s=>s.spot_name.toLowerCase().includes(searchValue)).map(s => (
+    let val = searchValue ? searchValue.toLowerCase() : null
+    const searchMenu = allSpots.filter(s=>s.spot_name.toLowerCase().includes(val)).map(s => (
       <Menu.Item
         className="menu-item"
         onClick={this.handleSpotClick}

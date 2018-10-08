@@ -149,9 +149,10 @@ h1.logo {
   cursor: pointer;
 }
 
-.menu-button:hover,
-.menu-button:focus {
+.menu-button:hover {
   background: #001f3d;
+}
+.menu-button:focus {
   outline: none;
 }
 
