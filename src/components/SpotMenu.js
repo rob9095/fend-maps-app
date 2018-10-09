@@ -21,7 +21,9 @@ class SpotMenu extends React.Component {
 
   scrollTo = (key) => {
     const node = document.getElementById(key)
-    node.scrollIntoView({block: 'center', behavior: 'smooth'});
+    if (node) {
+      node.scrollIntoView({block: 'center', behavior: 'smooth'})
+    }
   }
 
   handleSpotClick = (e) => {

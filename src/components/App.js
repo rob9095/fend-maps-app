@@ -33,6 +33,7 @@ class App extends Component {
     console.log(err)
     this.setState({
       error: message,
+      loading: false,
     })
   }
 
