@@ -32,16 +32,13 @@ class App extends Component {
   handleError = ({err, message}) => {
     console.log(err)
     this.setState({
-      loading: false,
-      error: {
-        message,
-      }
+      error: message,
     })
   }
 
   handleSearch = (e) => {
     this.setState({
-      [e.target.name]: e.target.value ? e.target.value : '',
+      [e.target.name]: e.target.value,
     })
   }
 
@@ -63,14 +60,14 @@ class App extends Component {
       this.setState({
         loading: false,
         allSpots,
-        //Huntington Beach Orange County is defaults
+        //Huntington Beach Orange County is default
         currentSpot: allSpots.find(s => s.spot_id === 643),
         counties,
         showSidebar: clientWidth > 600 ? true : false,
       })
     })
     .catch(err => {
-      this.handleError({err,message:'Unable to get spot data'})
+      this.handleError({err,message:'Something went wrong, please try again'})
     })
   }
 
@@ -106,6 +103,14 @@ class App extends Component {
     }
     return (
       <div className="App">
+        {this.state.error && (
+          <div className="error-message-container">
+            <div className="column error-message">
+              <Icon type="close-circle" theme="filled" style={{color: '#f5222d', marginRight: 5}}/>
+              {this.state.error}
+            </div>
+          </div>
+        )}
         <aside id="left-sidebar" className={this.state.showSidebar ? "column open" : "column closed"}>
             <div className="content">
               <div className="search-container">

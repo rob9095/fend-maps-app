@@ -339,3 +339,23 @@ td, th div {
   position: fixed;
   font-weight: bold;
 }
+
+/* Error Message */
+
+.error-message-container {
+  position: fixed;
+  top: 15px;
+  width: 100%;
+  display: flex;
+  justify-content: center
+}
+
+.error-message {
+  background: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
