@@ -343,11 +343,12 @@ td, th div {
 /* Error Message */
 
 .error-message-container {
-  position: fixed;
-  top: 15px;
-  width: 100%;
   display: flex;
-  justify-content: center
+  justify-content: center;
+  position: absolute;
+  text-align: center;
+  right: 10px;
+  font-size: 12px;
 }
 
 .error-message {
