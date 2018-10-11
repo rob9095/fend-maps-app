@@ -23,7 +23,7 @@ export default class MapMarker extends Component {
   render(){
     const { name, county, id, isCurrentSpot } = this.props
     let n = ''
-    for (let word of name.split(' ')){
+    for (let word of name.split(' ').filter(l=>l !== '-')){
       n = n + word[0]
     }
     return(
