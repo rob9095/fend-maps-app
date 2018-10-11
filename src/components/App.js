@@ -25,12 +25,16 @@ class App extends Component {
     }
   }
 
+  gm_authFailure(){
+    window.alert("Google Maps error")
+  }
+
   componentDidMount() {
+    window.gm_authFailure = this.gm_authFailure;
     this.init()
   }
 
   handleError = ({err, message}) => {
-    console.log(err)
     this.setState({
       error: message,
       loading: false,
@@ -68,7 +72,8 @@ class App extends Component {
       })
     })
     .catch(err => {
-      this.handleError({err,message:'Something went wrong, please try again'})
+      this.handleError({err,message:'Failed to get surf spot data, please try again'})
+      window.alert('Failed to get surf spot data')
     })
   }
 
@@ -103,7 +108,7 @@ class App extends Component {
       )
     }
     return (
-      <div className="App">
+      <div className={this.state.error ? "App error" : "App"}>
         {this.state.error && (
           <div className="error-message-container">
             <div className="column error-message">
@@ -145,6 +150,7 @@ class App extends Component {
                 <button
                   className="menu-button"
                   onClick={this.toggle('showSidebar')}
+                  name={this.state.showSidebar ? 'Side Navigation, click to close' : 'Side Navigation, click to open'}
                   >
                     <Icon
                       type={this.state.showSidebar ? "align-right" : "align-left"}
@@ -159,6 +165,11 @@ class App extends Component {
                   <button
                     className="menu-button"
                     onClick={this.toggle('showMenu')}
+                    name={this.state.showMenu ?
+                      'Surfcast More Information Menu, click to close'
+                      :
+                      'Surfcast More Information Menu, click to open'
+                    }
                     >
                     <Icon
                       type="ellipsis"
@@ -176,7 +187,12 @@ class App extends Component {
                         Surfcast provides live surf forecasts, wind, and tide information for more than 100 surf spots in California.
                       </p>
                       <div className="column" style={{paddingTop: 10}}>
-                        <Button href="https://github.com/rob9095/fend-maps-app" type="primary" icon="github">
+                        <Button
+                          href="https://github.com/rob9095/fend-maps-app"
+                          type="primary"
+                          icon="github"
+                          name="Github"
+                        >
                           Github
                         </Button>
                       </div>

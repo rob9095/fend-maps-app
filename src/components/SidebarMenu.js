@@ -1,6 +1,6 @@
 import React from 'react';
-import { Menu, Icon } from 'antd';
-const SubMenu = Menu.SubMenu;
+import { Menu, Icon } from 'antd'; // eslint-disable-line no-unused-vars
+const SubMenu = Menu.SubMenu; // eslint-disable-line no-unused-vars
 
 class SidebarMenu extends React.Component {
   constructor(props) {
@@ -97,6 +97,8 @@ class SidebarMenu extends React.Component {
           <div
             id={county+ "-title"}
             className="ant-menu-submenu-title"
+            aria-label={`${county}, click to expand/collapse`}
+            role="link"
           >
             <span id={county + "-span"}>{county}</span>
               <Icon
@@ -113,7 +115,6 @@ class SidebarMenu extends React.Component {
               :
               "ant-menu ant-menu-sub ant-menu-inline ant-menu-hidden"
             }
-            role="menu"
           >
             {items}
           </ul>
@@ -121,11 +122,11 @@ class SidebarMenu extends React.Component {
       )
     })
     return (
-      <div>
-        <ul className="ant-menu ant-menu-dark ant-menu-root ant-menu-inline" role="menu">
+      <nav>
+        <ul className="ant-menu ant-menu-dark ant-menu-root ant-menu-inline">
           {searchValue ? searchMenu : menu}
         </ul>
-      </div>
+      </nav>
     );
   }
 }

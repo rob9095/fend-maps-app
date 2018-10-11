@@ -75,7 +75,7 @@ a.underline {
 #left-sidebar.open {
   flex-shrink: 0;
   background: #001529;
-  min-width: 220px;
+  width: 220px;
 }
 
 #left-sidebar.closed {
@@ -362,17 +362,21 @@ td, th div {
 
 /* Error Message */
 
+.App.error {
+  margin-top: 40px !important;
+}
+
 .error-message-container {
-  display: flex;
-  justify-content: center;
-  position: absolute;
+  position: fixed;
   text-align: center;
-  right: 10px;
-  font-size: 12px;
+  width: 100%;
+  margin-top: -40px;
+  background: rgb(245, 34, 45);
+  color: #fff;
+  font-size: 16px;
 }
 
 .error-message {
-  background: #fff;
   padding: 10px 20px;
   border-radius: 5px;
   display: flex;
