@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Map from './Map';
-import SpotMenu from './SpotMenu';
+import SidebarMenu from './SidebarMenu';
 import SpotModal from './SpotModal';
 import { Icon, Input, Spin, Button } from 'antd'
 import {apiCall} from '../services';
@@ -130,7 +130,7 @@ class App extends Component {
                   }
                 />
               </div>
-              <SpotMenu
+              <SidebarMenu
                 allSpots={allSpots}
                 currentSpot={currentSpot}
                 counties={counties}

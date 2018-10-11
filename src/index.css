@@ -72,10 +72,10 @@ a.underline {
 
 /* Sidebar  */
 
-#left-sidebar {
+#left-sidebar.open {
   flex-shrink: 0;
   background: #001529;
-  width: 220px;
+  min-width: 220px;
 }
 
 #left-sidebar.closed {
@@ -103,6 +103,26 @@ a.underline {
 .menu-item:focus {
   outline: none;
   color: #fff !important;
+}
+
+.flipY {
+  transform: rotate(180deg);
+}
+
+.ant-menu-inline .ant-menu-submenu-title {
+  padding: 0px 20px !important;
+}
+
+.menu-arrow {
+  float: right;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+}
+
+.menu-arrow svg {
+  font-size: 12px;
 }
 
 /* App Container */
