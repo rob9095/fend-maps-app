@@ -58,18 +58,26 @@ class ForecastTable extends Component {
 
   handleDataFetch = (county,id) => {
     return new Promise( async (resolve,reject) => {
-      let c = county.toLowerCase().replace(/ /g,'-')
-      let forecast = await apiCall(`http://api.spitcast.com/api/spot/forecast/${id}/?dcat=week`)
-      let wind = await apiCall(`http://api.spitcast.com/api/county/wind/${c}/`)
-      let temp = await apiCall(`http://api.spitcast.com/api/county/water-temperature/${c}/`)
-      let tide = await apiCall(`http://api.spitcast.com/api/county/tide/${c}/`)
-      // if the response failed we set an empty array or 'n/a'
-      resolve({
-        forecast: forecast || [],
-        wind: wind || [],
-        temp: temp || {fahrenheit:'n/a',wetsuit:'n/a'},
-        tide: tide || [],
-      })
+      try {
+        let c = county.toLowerCase().replace(/ /g,'-')
+        let forecast = await apiCall(`http://api.spitcast.com/api/spot/forecast/${id}/?dcat=week`)
+        let wind = await apiCall(`http://api.spitcast.com/api/county/wind/${c}/`)
+        let temp = await apiCall(`http://api.spitcast.com/api/county/water-temperature/${c}/`)
+        let tide = await apiCall(`http://api.spitcast.com/api/county/tide/${c}/`)
+        resolve({
+          forecast,
+          wind,
+          temp,
+          tide,
+        })
+      } catch(err) {
+        this.setState({
+          loading:false,
+          temp: 'n/a',
+          wetsuit:'n/a',
+        })
+        reject(err)
+      }
     })
   }
 
@@ -117,7 +125,7 @@ class ForecastTable extends Component {
     this.setState({
       forecast,
       tide,
-      temp: spotforecast.temp.fahrenheit,
+      temp: spotforecast.temp.fahrenheit + " °F",
       wetsuit: spotforecast.temp.wetsuit,
       loading: false,
     })
@@ -145,18 +153,21 @@ class ForecastTable extends Component {
         <div>
           <h3>Tide Chart (ft)</h3>
           <div className="tide-container">
-            {Object.values(this.state.tide).length === 0 && !this.state.loading && (<span className="no-data">Tide Data Unavailable</span>)}
-            <AreaChart
-              data={this.state.tide}
-              height={"150px"}
-              min={parseInt(Object.values(this.state.tide).sort((a,b)=>a-b)[0])- 1}
-              max={parseInt(Object.values(this.state.tide).sort((a,b)=>b-a)[0])+ 1}
-              colors={['#1890ff']}
-            />
+            {Object.values(this.state.tide).length === 0 && !this.state.loading ?
+              <h4 style={{marginBottom:20}}>Tide Data Unavailable</h4>
+              :
+              <AreaChart
+                data={this.state.tide}
+                height={"150px"}
+                min={parseInt(Object.values(this.state.tide).sort((a,b)=>a-b)[0])- 1}
+                max={parseInt(Object.values(this.state.tide).sort((a,b)=>b-a)[0])+ 1}
+                colors={['#1890ff']}
+              />
+            }
           </div>
           <h3>Hourly Forecast</h3>
           <div className="temp-container">
-            <h5>Temperature: <span>{this.state.temp} °F</span></h5>
+            <h5>Temperature: <span>{this.state.temp}</span></h5>
             <h5>Recommended: <span>{this.state.wetsuit}</span></h5>
           </div>
           <Table
