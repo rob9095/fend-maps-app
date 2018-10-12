@@ -4,7 +4,7 @@ import SidebarMenu from './SidebarMenu';
 import SpotModal from './SpotModal';
 import { Icon, Input, Spin, Button } from 'antd'
 import {apiCall} from '../services';
-import {activeSpots} from '../activeSpots'
+import {activeSpots} from '../activeSpots';
 
 class App extends Component {
   state = {
@@ -36,7 +36,7 @@ class App extends Component {
 
   handleError = ({err, message}) => {
     this.setState({
-      error: message,
+      errors: [this.state.errors, message],
       loading: false,
     })
   }
@@ -72,7 +72,7 @@ class App extends Component {
       })
     })
     .catch(err => {
-      this.handleError({err,message:'Failed to get surf spot data, please try again'})
+      this.handleError({err,message:'Failed to get surf spot data'})
       window.alert('Failed to get surf spot data')
     })
   }
@@ -108,12 +108,13 @@ class App extends Component {
       )
     }
     return (
-      <div className={this.state.error ? "App error" : "App"}>
-        {this.state.error && (
+      <div className={this.state.errors ? "App error" : "App"}>
+        {this.state.errors && (
           <div className="error-message-container">
             <div className="column error-message">
-              <Icon type="close-circle" theme="filled" style={{color: '#f5222d', marginRight: 5}}/>
-              {this.state.error}
+              <ul className="error-list">
+                {this.state.errors.map(e=><li key={e}>{e}</li>)}
+              </ul>
             </div>
           </div>
         )}
@@ -150,7 +151,7 @@ class App extends Component {
                 <button
                   className="menu-button"
                   onClick={this.toggle('showSidebar')}
-                  name={this.state.showSidebar ? 'Side Navigation, click to close' : 'Side Navigation, click to open'}
+                  aria-label={this.state.showSidebar ? 'Side Navigation, click to close' : 'Side Navigation, click to open'}
                   >
                     <Icon
                       type={this.state.showSidebar ? "align-right" : "align-left"}
@@ -165,7 +166,7 @@ class App extends Component {
                   <button
                     className="menu-button"
                     onClick={this.toggle('showMenu')}
-                    name={this.state.showMenu ?
+                    aria-label={this.state.showMenu ?
                       'Surfcast More Information Menu, click to close'
                       :
                       'Surfcast More Information Menu, click to open'
@@ -203,20 +204,22 @@ class App extends Component {
               </div>
             )}
             <article className="content">
-              <Map
-                currentSpot={currentSpot}
-                allSpots={allSpots}
-                searchValue={searchValue}
-                onNewSpot={this.handleNewSpot}
-              />
-              {this.state.showModal && (
-                <SpotModal
-                  id={currentSpot.spot_id}
-                  name={currentSpot.spot_name}
-                  county={currentSpot.county_name}
-                  onClose={this.toggle('showModal')}
+                <Map
+                  currentSpot={currentSpot}
+                  allSpots={allSpots}
+                  searchValue={searchValue}
+                  onNewSpot={this.handleNewSpot}
+                  onError={this.handleError}
+                  errors={this.state.errors}
                 />
-              )}
+                {this.state.showModal && (
+                  <SpotModal
+                    id={currentSpot.spot_id}
+                    name={currentSpot.spot_name}
+                    county={currentSpot.county_name}
+                    onClose={this.toggle('showModal')}
+                  />
+                )}
             </article>
             <footer className={this.state.showSidebar ? "footer sidebar-open" : "footer"}>
               <div className="details">

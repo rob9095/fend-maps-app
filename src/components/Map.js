@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Spin, Button, Icon } from 'antd';
 import GoogleMapReact from 'google-map-react';
 import MapMarker from './MapMarker';
 
@@ -7,6 +8,30 @@ class Map extends Component {
     super(props)
     this.state = {
       zoom: 12,
+      loading: true,
+    }
+  }
+
+  componentDidMount() {
+    if (this.props.errors) {
+      this.setState({
+        loading: false,
+        error: true,
+      })
+    }
+  }
+
+  handleGoogleApiLoaded = ({map, maps}) => {
+    if (map && maps) {
+      this.setState({
+        loading: false
+      })
+    } else {
+      this.setState({
+        loading: false,
+        error: true,
+      })
+      this.props.onError({message: 'Failed to load Google Maps'})
     }
   }
 
@@ -46,17 +71,40 @@ class Map extends Component {
         isCurrentSpot={s.spot_id === currentSpot.spot_id}
       />
     ))
+    if (this.state.error) {
+      return(
+        <div
+          className="map-error-container column"
+        >
+          <div className="map-message">
+            <Icon type="warning" theme="outlined" style={{fontSize: '3em',marginBottom: 10}} />
+            <h3>Failed to Load Google Maps</h3>
+            <Button
+              type="primary"
+              onClick={()=>window.location.reload()}
+              aria-label="Refresh Page"
+            >
+              Refresh Page
+            </Button>
+          </div>
+        </div>
+      )
+    }
     return (
       <div>
-        <GoogleMapReact
-          style={{width: '100%', height: '95vh'}}
-          bootstrapURLKeys={{ key: 'AIzaSyDCbwt_f4xYHZsCC54Zjq_eb5b5nb4RrAU' }}
-          center={currentSpot.cords}
-          defaultZoom={this.state.zoom}
-          hoverDistance={20}
-        >
-          {searchValue ? searchMarkers : markers}
-        </GoogleMapReact>
+        <Spin spinning={this.state.loading}>
+          <GoogleMapReact
+            style={{width: '100%', height: '95vh'}}
+            bootstrapURLKeys={{ key: 'AIzaSyDCbwt_f4xYHZsCC54Zjq_eb5b5nb4RrAU' }}
+            center={currentSpot.cords}
+            defaultZoom={this.state.zoom}
+            hoverDistance={20}
+            onGoogleApiLoaded={this.handleGoogleApiLoaded}
+            yesIWantToUseGoogleMapApiInternals
+          >
+            {searchValue ? searchMarkers : markers}
+          </GoogleMapReact>
+        </Spin>
       </div>
     );
   }
