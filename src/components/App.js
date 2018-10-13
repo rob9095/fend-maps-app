@@ -122,6 +122,7 @@ class App extends Component {
             <div className="content">
               <div className="search-container">
                 <Input
+                  aria-label="search surf spots"
                   autoFocus
                   id="search"
                   placeholder="Search"
@@ -152,6 +153,7 @@ class App extends Component {
                   className="menu-button"
                   onClick={this.toggle('showSidebar')}
                   aria-label={this.state.showSidebar ? 'Side Navigation, click to close' : 'Side Navigation, click to open'}
+                  title="Side Navigation"
                   >
                     <Icon
                       type={this.state.showSidebar ? "align-right" : "align-left"}
@@ -167,10 +169,11 @@ class App extends Component {
                     className="menu-button"
                     onClick={this.toggle('showMenu')}
                     aria-label={this.state.showMenu ?
-                      'Surfcast More Information Menu, click to close'
+                      'More Information Menu, click to close'
                       :
-                      'Surfcast More Information Menu, click to open'
+                      'More Information Menu, click to open'
                     }
+                    title="More Information Menu"
                     >
                     <Icon
                       type="ellipsis"
@@ -192,14 +195,14 @@ class App extends Component {
                           href="https://github.com/rob9095/fend-maps-app"
                           type="primary"
                           icon="github"
-                          name="Github"
+                          aria-label="See Project on Github"
                         >
                           Github
                         </Button>
                       </div>
                   </div>
                   <div className="menu-footer">
-                    Data provided by <a href="http://www.spitcast.com/api/docs/">Spit Cast</a>
+                    Data provided by <a aria-label="Spit Cast Api" href="http://www.spitcast.com/api/docs/">Spit Cast</a>
                   </div>
               </div>
             )}
@@ -223,10 +226,10 @@ class App extends Component {
             </article>
             <footer className={this.state.showSidebar ? "footer sidebar-open" : "footer"}>
               <div className="details">
-                <a href="http://github.com/rob9095"><Icon type="github" theme="outlined" /> @rob9095</a>
+                <a aria-label="@rob9095 Github Profile" href="http://github.com/rob9095"><Icon type="github" theme="outlined" /> @rob9095</a>
               </div>
               <div className="credit">
-                Data Provided by <a className="underline" href="http://www.spitcast.com/api/docs/">Spit Cast</a>
+                Data Provided by <a aria-label="Spit Cast Api" className="underline" href="http://www.spitcast.com/api/docs/">Spit Cast</a>
               </div>
             </footer>
         </div>

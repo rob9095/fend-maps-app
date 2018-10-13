@@ -91,10 +91,9 @@ class Map extends Component {
       )
     }
     return (
-      <div>
-        <Spin spinning={this.state.loading}>
+      <Spin spinning={this.state.loading}>
           <GoogleMapReact
-            style={{width: '100%', height: '95vh'}}
+            style={{width: '100%', height: '95vh',marginBottom: -61}}
             bootstrapURLKeys={{ key: 'AIzaSyDCbwt_f4xYHZsCC54Zjq_eb5b5nb4RrAU' }}
             center={currentSpot.cords}
             defaultZoom={this.state.zoom}
@@ -104,8 +103,7 @@ class Map extends Component {
           >
             {searchValue ? searchMarkers : markers}
           </GoogleMapReact>
-        </Spin>
-      </div>
+      </Spin>
     );
   }
 }

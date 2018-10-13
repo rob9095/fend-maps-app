@@ -56,8 +56,10 @@ body div .App {
   width: 28px;
 }
 
-a.underline {
+a.underline,
+a.underline:focus, {
   border-bottom: 1px solid;
+  text-decoration: none;
 }
 
 /* Loading Screen */
