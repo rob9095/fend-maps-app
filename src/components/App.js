@@ -65,8 +65,8 @@ class App extends Component {
       this.setState({
         loading: false,
         allSpots,
-        //Windansea San Diego County is default
-        currentSpot: allSpots.find(s => s.spot_id === 227),
+        //Zuma Beach LA County is default
+        currentSpot: allSpots.find(s => s.spot_id === 206),
         counties,
         showSidebar: clientWidth > 600 ? true : false,
       })
